@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antaxation Corp - Professional Accounting Services</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #1e3d59, #2e5266);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #f39c12;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: rgba(255,255,255,0.1);
+            color: #f39c12;
+        }
+
+        /* Page Content */
+        .page {
+            display: none;
+            min-height: calc(100vh - 200px);
+            padding: 2rem 0;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Home Page */
+        .hero {
+            background: linear-gradient(rgba(30, 61, 89, 0.8), rgba(46, 82, 102, 0.8)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23e8f4f8" width="1200" height="600"/><circle cx="200" cy="150" r="100" fill="%23d1e7dd" opacity="0.6"/><circle cx="800" cy="400" r="150" fill="%23f8d7da" opacity="0.4"/><rect x="400" y="100" width="400" height="200" fill="%23fff3cd" opacity="0.5"/></svg>');
+            color: white;
+            text-align: center;
+            padding: 4rem 0;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            background: #f39c12;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background: #e67e22;
+            transform: translateY(-2px);
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-card h3 {
+            color: #1e3d59;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        /* Blog Page */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .blog-post {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .blog-post:hover {
+            transform: translateY(-5px);
+        }
+
+        .blog-image {
+            height: 200px;
+            background: linear-gradient(45deg, #1e3d59, #f39c12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .blog-content {
+            padding: 1.5rem;
+        }
+
+        .blog-post h3 {
+            color: #1e3d59;
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-meta {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Ebook Store */
+        .ebook-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .ebook-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .ebook-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .ebook-cover {
+            height: 250px;
+            background: linear-gradient(45deg, #1e3d59, #2e5266);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .ebook-info {
+            padding: 1.5rem;
+        }
+
+        .ebook-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #f39c12;
+            margin: 1rem 0;
+        }
+
+        .payment-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .payment-btn {
+            flex: 1;
+            min-width: 120px;
+            padding: 0.8rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .paypal-btn {
+            background: #0070ba;
+            color: white;
+        }
+
+        .paypal-btn:hover {
+            background: #005ea6;
+        }
+
+        .stripe-btn {
+            background: #6772e5;
+            color: white;
+        }
+
+        .stripe-btn:hover {
+            background: #5469d4;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        /* Footer */
+        footer {
+            background: #1e3d59;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            color: #f39c12;
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .payment-buttons {
+                flex-direction: column;
+            }
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #1e3d59;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Antaxation Corp</div>
+                <nav>
+                    <ul>
+                        <li><a href="#" onclick="showPage('home')" class="nav-link active">Home</a></li>
+                        <li><a href="#" onclick="showPage('blog')" class="nav-link">Blog</a></li>
+                        <li><a href="#" onclick="showPage('ebooks')" class="nav-link">Ebooks</a></li>
+                        <li><a href="#" onclick="showPage('contact')" class="nav-link">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Home Page -->
+        <div id="home" class="page active">
+            <section class="hero">
+                <h1>Professional Accounting Services</h1>
+                <p>Expert financial guidance for businesses and individuals. Maximize your financial potential with our comprehensive accounting solutions.</p>
+                <a href="#" onclick="showPage('contact')" class="cta-button">Get Free Consultation</a>
+            </section>
+
+            <h2 class="section-title">Our Services</h2>
+            <div class="services">
+                <div class="service-card">
+                    <h3>📊 Tax Preparation</h3>
+                    <p>Comprehensive tax preparation services for individuals and businesses. We ensure you get every deduction you deserve while staying compliant with current tax laws.</p>
+                </div>
+                <div class="service-card">
+                    <h3>💼 Business Consulting</h3>
+                    <p>Strategic financial consulting to help your business grow. From startup guidance to expansion planning, we provide the insights you need.</p>
+                </div>
+                <div class="service-card">
+                    <h3>📈 Financial Planning</h3>
+                    <p>Personalized financial planning services to secure your future. Investment advice, retirement planning, and wealth management strategies.</p>
+                </div>
+                <div class="service-card">
+                    <h3>🔍 Audit Services</h3>
+                    <p>Professional audit and review services to ensure your financial statements are accurate and compliant with regulations.</p>
+                </div>
+                <div class="service-card">
+                    <h3>💰 Bookkeeping</h3>
+                    <p>Accurate and timely bookkeeping services to keep your finances organized. Monthly reconciliations and financial statement preparation.</p>
+                </div>
+                <div class="service-card">
+                    <h3>🏢 Payroll Management</h3>
+                    <p>Complete payroll processing services including tax withholdings, direct deposits, and compliance reporting.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Blog Page -->
+        <div id="blog" class="page">
+            <h1 class="section-title">Financial Insights Blog</h1>
+            <div class="blog-grid">
+                <article class="blog-post">
+                    <div class="blog-image">📊</div>
+                    <div class="blog-content">
+                        <h3>2024 Tax Law Changes: What You Need to Know</h3>
+                        <div class="blog-meta">March 15, 2024 • By Sarah Sterling, CPA</div>
+                        <p>The latest tax law updates that could impact your 2024 filing. Learn about new deductions, credits, and compliance requirements that could save you money.</p>
+                        <a href="#" class="cta-button" style="font-size: 0.9rem; padding: 0.5rem 1rem;">Read More</a>
+                    </div>
+                </article>
+
+                <article class="blog-post">
+                    <div class="blog-image">💼</div>
+                    <div class="blog-content">
+                        <h3>Small Business Financial Planning Strategies</h3>
+                        <div class="blog-meta">March 10, 2024 • By Michael Chen, CFP</div>
+                        <p>Essential financial planning strategies every small business owner should implement. From cash flow management to growth funding options.</p>
+                        <a href="#" class="cta-button" style="font-size: 0.9rem; padding: 0.5rem 1rem;">Read More</a>
+                    </div>
+                </article>
+
+                <article class="blog-post">
+                    <div class="blog-image">🏠</div>
+                    <div class="blog-content">
+                        <h3>Home Office Deductions: Maximize Your Savings</h3>
+                        <div class="blog-meta">March 5, 2024 • By Lisa Rodriguez, EA</div>
+                        <p>Working from home? Learn how to properly claim home office deductions and what expenses qualify for tax benefits.</p>
+                        <a href="#" class="cta-button" style="font-size: 0.9rem; padding: 0.5rem 1rem;">Read More</a>
+                    </div>
+                </article>
+
+                <article class="blog-post">
+                    <div class="blog-image">📈</div>
+                    <div class="blog-content">
+                        <h3>Investment Strategies for Tax Efficiency</h3>
+                        <div class="blog-meta">February 28, 2024 • By David Park, CFA</div>
+                        <p>Smart investment strategies that minimize your tax burden while maximizing returns. Tax-loss harvesting and retirement account optimization.</p>
+                        <a href="#" class="cta-button" style="font-size: 0.9rem; padding: 0.5rem 1rem;">Read More</a>
+                    </div>
+                </article>
+
+                <article class="blog-post">
+                    <div class="blog-image">🎯</div>
+                    <div class="blog-content">
+                        <h3>Quarterly Business Review Best Practices</h3>
+                        <div class="blog-meta">February 20, 2024 • By Jennifer Adams, CPA</div>
+                        <p>How to conduct effective quarterly business reviews that drive growth and identify financial opportunities.</p>
+                        <a href="#" class="cta-button" style="font-size: 0.9rem; padding: 0.5rem 1rem;">Read More</a>
+                    </div>
+                </article>
+
+                <article class="blog-post">
+                    <div class="blog-image">💡</div>
+                    <div class="blog-content">
+                        <h3>Retirement Planning in Your 30s and 40s</h3>
+                        <div class="blog-meta">February 15, 2024 • By Robert Kim, CFP</div>
+                        <p>Critical retirement planning strategies for mid-career professionals. 401(k) optimization, IRA conversions, and catch-up contributions.</p>
+                        <a href="#" class="cta-button" style="font-size: 0.9rem; padding: 0.5rem 1rem;">Read More</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+        <!-- Ebooks Page -->
+        <div id="ebooks" class="page">
+            <h1 class="section-title">Professional Finance Ebooks</h1>
+            <div class="ebook-grid">
+                <div class="ebook-card">
+                    <div class="ebook-cover">
+                        <div>
+                            <div style="font-size: 2rem; margin-bottom: 1rem;">📚</div>
+                            <strong>Complete Guide to Small Business Taxes</strong>
+                        </div>
+                    </div>
+                    <div class="ebook-info">
+                        <h3>Complete Guide to Small Business Taxes</h3>
+                        <p>Everything you need to know about small business tax planning, deductions, and compliance. 150+ pages of expert advice.</p>
+                        <div class="ebook-price">$29.99</div>
+                        <div class="payment-buttons">
+                            <button class="payment-btn paypal-btn" onclick="processPayment('paypal', 29.99, 'Small Business Tax Guide')">
+                                Pay with PayPal
+                            </button>
+                            <button class="payment-btn stripe-btn" onclick="processPayment('stripe', 29.99, 'Small Business Tax Guide')">
+                                Pay with Card
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ebook-card">
+                    <div class="ebook-cover">
+                        <div>
+                            <div style="font-size: 2rem; margin-bottom: 1rem;">💰</div>
+                            <strong>Personal Finance Mastery</strong>
+                        </div>
+                    </div>
+                    <div class="ebook-info">
+                        <h3>Personal Finance Mastery</h3>
+                        <p>Master your personal finances with proven strategies for budgeting, investing, and building wealth. Transform your financial future.</p>
+                        <div class="ebook-price">$24.99</div>
+                        <div class="payment-buttons">
+                            <button class="payment-btn paypal-btn" onclick="processPayment('paypal', 24.99, 'Personal Finance Mastery')">
+                                Pay with PayPal
+                            </button>
+                            <button class="payment-btn stripe-btn" onclick="processPayment('stripe', 24.99, 'Personal Finance Mastery')">
+                                Pay with Card
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ebook-card">
+                    <div class="ebook-cover">
+                        <div>
+                            <div style="font-size: 2rem; margin-bottom: 1rem;">📊</div>
+                            <strong>Investment Strategies for Beginners</strong>
+                        </div>
+                    </div>
+                    <div class="ebook-info">
+                        <h3>Investment Strategies for Beginners</h3>
+                        <p>Start your investment journey with confidence. Learn about stocks, bonds, ETFs, and building a diversified portfolio.</p>
+                        <div class="ebook-price">$19.99</div>
+                        <div class="payment-buttons">
+                            <button class="payment-btn paypal-btn" onclick="processPayment('paypal', 19.99, 'Investment Strategies for Beginners')">
+                                Pay with PayPal
+                            </button>
+                            <button class="payment-btn stripe-btn" onclick="processPayment('stripe', 19.99, 'Investment Strategies for Beginners')">
+                                Pay with Card
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ebook-card">
+                    <div class="ebook-cover">
+                        <div>
+                            <div style="font-size: 2rem; margin-bottom: 1rem;">🏢</div>
+                            <strong>Business Financial Planning</strong>
+                        </div>
+                    </div>
+                    <div class="ebook-info">
+                        <h3>Business Financial Planning</h3>
+                        <p>Comprehensive guide to business financial planning, cash flow management, and growth strategies for entrepreneurs.</p>
+                        <div class="ebook-price">$34.99</div>
+                        <div class="payment-buttons">
+                            <button class="payment-btn paypal-btn" onclick="processPayment('paypal', 34.99, 'Business Financial Planning')">
+                                Pay with PayPal
+                            </button>
+                            <button class="payment-btn stripe-btn" onclick="processPayment('stripe', 34.99, 'Business Financial Planning')">
+                                Pay with Card
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ebook-card">
+                    <div class="ebook-cover">
+                        <div>
+                            <div style="font-size: 2rem; margin-bottom: 1rem;">🎯</div>
+                            <strong>Retirement Planning Essentials</strong>
+                        </div>
+                    </div>
+                    <div class="ebook-info">
+                        <h3>Retirement Planning Essentials</h3>
+                        <p>Secure your retirement with strategic planning. 401(k) optimization, IRA strategies, and Social Security planning.</p>
+                        <div class="ebook-price">$27.99</div>
+                        <div class="payment-buttons">
+                            <button class="payment-btn paypal-btn" onclick="processPayment('paypal', 27.99, 'Retirement Planning Essentials')">
+                                Pay with PayPal
+                            </button>
+                            <button class="payment-btn stripe-btn" onclick="processPayment('stripe', 27.99, 'Retirement Planning Essentials')">
+                                Pay with Card
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ebook-card">
+                    <div class="ebook-cover">
+                        <div>
+                            <div style="font-size: 2rem; margin-bottom: 1rem;">📋</div>
+                            <strong>Tax Preparation Checklist</strong>
+                        </div>
+                    </div>
+                    <div class="ebook-info">
+                        <h3>Tax Preparation Checklist</h3>
+                        <p>Never miss a deduction again! Complete checklist and forms guide for personal and business tax preparation.</p>
+                        <div class="ebook-price">$14.99</div>
+                        <div class="payment-buttons">
+                            <button class="payment-btn paypal-btn" onclick="processPayment('paypal', 14.99, 'Tax Preparation Checklist')">
+                                Pay with PayPal
+                            </button>
+                            <button class="payment-btn stripe-btn" onclick="processPayment('stripe', 14.99, 'Tax Preparation Checklist')">
+                                Pay with Card
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Page -->
+        <div id="contact" class="page">
+            <h1 class="section-title">Contact Us</h1>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div class="service-card">
+                    <h3>📍 Office Location</h3>
+                    <p>123 Business Plaza<br>
+                    Financial District<br>
+                    New York, NY 10004</p>
+                    
+                    <h3 style="margin-top: 2rem;">📞 Contact Information</h3>
+                    <p>Phone: (555) 123-4567<br>
+                    Email: info@antaxation.com<br>
+                    Fax: (555) 123-4568</p>
+                    
+                    <h3 style="margin-top: 2rem;">🕒 Business Hours</h3>
+                    <p>Monday - Friday: 9:00 AM - 6:00 PM<br>
+                    Saturday: 10:00 AM - 2:00 PM<br>
+                    Sunday: Closed</p>
+                </div>
+                
+                <div class="service-card">
+                    <h3>💬 Send us a Message</h3>
+                    <form onsubmit="sendMessage(event)">
+                        <div style="margin-bottom: 1rem;">
+                            <label for="name" style="display: block; margin-bottom: 0.5rem;">Name:</label>
+                            <input type="text" id="name" required style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                            <label for="email" style="display: block; margin-bottom: 0.5rem;">Email:</label>
+                            <input type="email" id="email" required style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                            <label for="subject" style="display: block; margin-bottom: 0.5rem;">Subject:</label>
+                            <input type="text" id="subject" required style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                            <label for="message" style="display: block; margin-bottom: 0.5rem;">Message:</label>
+                            <textarea id="message" rows="5" required style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;"></textarea>
+                        </div>
+                        <button type="submit" class="cta-button">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Antaxation Corp</h4>
+                    <p>Professional accounting services you can trust. Over 20 years of experience helping businesses and individuals achieve their financial goals.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <p>Tax Preparation<br>
+                    Business Consulting<br>
+                    Financial Planning<br>
+                    Audit Services<br>
+                    Bookkeeping<br>
+                    Payroll Management</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <p>Financial Blog<br>
+                    Ebook Library<br>
+                    Tax Calendar<br>
+                    Financial Calculators<br>
+                    Client Portal</p>
+                </div>
+            </div>
+            <div style="border-top: 1px solid #444; padding-top: 1rem;">
+                <p>&copy; 2025 Antaxation Corp. All rights reserved. | Privacy Policy | Terms of Service</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update navigation
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => link.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        // Payment Processing
+        function processPayment(method, amount, product) {
+            let modalContent = '';
+            
+            if (method === 'paypal') {
+                modalContent = `
+                    <h2>PayPal Payment</h2>
+                    <p><strong>Product:</strong> ${product}</p>
+                    <p><strong>Amount:</strong> $${amount}</p>
+                    <div style="margin: 2rem 0;">
+                        <p>🔒 Secure PayPal Payment Processing</p>
+                        <p>You will be redirected to PayPal to complete your purchase.</p>
+                    </div>
+                    <button class="cta-button" onclick="simulatePaypalRedirect('${product}', ${amount})">
+                        Continue to PayPal
+                    </button>
+                    <p style="margin-top: 1rem; color: #666; font-size: 0.9rem;">
+                        <em>This is a demo. In production, this would redirect to actual PayPal payment processing.</em>
+                    </p>
+                `;
+            } else if (method === 'stripe') {
+                modalContent = `
+                    <h2>Credit Card Payment</h2>
+                    <p><strong>Product:</strong> ${product}</p>
+                    <p><strong>Amount:</strong> $${amount}</p>
+                    <form onsubmit="simulateStripePayment(event, '${product}', ${amount})">
+                        <div style="margin: 1rem 0;">
+                            <label for="cardNumber" style="display: block; margin-bottom: 0.5rem;">Card Number:</label>
+                            <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
+                        </div>
+                        <div style="display: flex; gap: 1rem; margin: 1rem 0;">
+                            <div style="flex: 1;">
+                                <label for="expiry" style="display: block; margin-bottom: 0.5rem;">Expiry:</label>
+                                <input type="text" id="expiry" placeholder="MM/YY" style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
+                            </div>
+                            <div style="flex: 1;">
+                                <label for="cvv" style="display: block; margin-bottom: 0.5rem;">CVV:</label>
+                                <input type="text" id="cvv" placeholder="123" style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
+                            </div>
+                        </div>
+                        <div style="margin: 1rem 0;">
+                            <label for="name" style="display: block; margin-bottom: 0.5rem;">Name on Card:</label>
+                            <input type="text" id="name" placeholder="John Smith" style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
+                        </div>
+                        <button type="submit" class="cta-button" style="width: 100%;">
+                            Pay $${amount}
+                        </button>
+                    </form>
+                    <p style="margin-top: 1rem; color: #666; font-size: 0.9rem;">
+                        <em>🔒 This is a demo. In production, this would use real Stripe payment processing with SSL encryption.</em>
+                    </p>
+                `;
+            }
+            
+            document.getElementById('modalContent').innerHTML = modalContent;
+            document.getElementById('paymentModal').style.display = 'block';
+        }
+
+        function simulatePaypalRedirect(product, amount) {
+            // Simulate PayPal processing
+            document.getElementById('modalContent').innerHTML = `
+                <h2>Processing Payment...</h2>
+                <div style="text-align: center; margin: 2rem 0;">
+                    <div style="border: 4px solid #f3f3f3; border-top: 4px solid #0070ba; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin: 0 auto;"></div>
+                </div>
+                <p>Redirecting to PayPal...</p>
+                <style>
+                    @keyframes spin {
+                        0% { transform: rotate(0deg); }
+                        100% { transform: rotate(360deg); }
+                    }
+                </style>
+            `;
+            
+            setTimeout(() => {
+                showPaymentSuccess(product, amount, 'PayPal');
+            }, 2000);
+        }
+
+        function simulateStripePayment(event, product, amount) {
+            event.preventDefault();
+            
+            // Simulate Stripe processing
+            document.getElementById('modalContent').innerHTML = `
+                <h2>Processing Payment...</h2>
+                <div style="text-align: center; margin: 2rem 0;">
+                    <div style="border: 4px solid #f3f3f3; border-top: 4px solid #6772e5; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin: 0 auto;"></div>
+                </div>
+                <p>Processing your credit card...</p>
+            `;
+            
+            setTimeout(() => {
+                showPaymentSuccess(product, amount, 'Credit Card');
+            }, 2000);
+        }
+
+        function showPaymentSuccess(product, amount, method) {
+            document.getElementById('modalContent').innerHTML = `
+                <h2 style="color: #28a745;">✅ Payment Successful!</h2>
+                <div style="background: #d4edda; border: 1px solid #c3e6cb; padding: 1rem; border-radius: 5px; margin: 1rem 0;">
+                    <p><strong>Product:</strong> ${product}</p>
+                    <p><strong>Amount:</strong> $${amount}</p>
+                    <p><strong>Payment Method:</strong> ${method}</p>
+                    <p><strong>Transaction ID:</strong> TXN${Date.now()}</p>
+                </div>
+                <p>Thank you for your purchase! You will receive a download link via email within 5 minutes.</p>
+                <button class="cta-button" onclick="closeModal()">Close</button>
+                <p style="margin-top: 1rem; color: #666; font-size: 0.9rem;">
+                    <em>In production, this would trigger email delivery and account access.</em>
+                </p>
+            `;
+        }
+
+        function closeModal() {
+            document.getElementById('paymentModal').style.display = 'none';
+        }
+
+        // Contact form
+        function sendMessage(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            // Simulate sending message
+            alert(`Thank you, ${name}! Your message has been sent. We'll respond to ${email} within 24 hours.`);
+            event.target.reset();
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('paymentModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
